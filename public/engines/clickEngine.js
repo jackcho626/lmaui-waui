@@ -146,6 +146,31 @@ function melodyToString() {
   return str;
 }
 
+function stringToMelody() {
+  var str = ‘A^4*4-Cb^3*16’;
+  var i = 0;
+  while (i < str.length) {
+    // Inner while loops parse letter, octave, length
+    // Increment after each loop to skip the key characters
+    var letter, octave, length = '';
+    while (str.charAt(i) != '^') {
+      letter += str.charAt(i);
+      i++;
+    }
+    i++;
+    while (str.charAt(i) != '*') {
+      octave += str.charAt(i);
+    }
+    i++;
+    // stop parsing length when either at '-' or end of string
+    while (i != str.length && str.charAt(i) != '-') {
+      length += str.charAt(i);
+    }
+    i++;
+    melody += {letter: letter, octave: octave, length: length};
+  }
+}
+
 function chordsToString() {
   var str = '';
   for (var i = 0; i < chords.length; i++) {
